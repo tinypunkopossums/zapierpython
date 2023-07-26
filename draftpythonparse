@@ -1,0 +1,47 @@
+raw_data = input_data['data']
+
+# Split the raw data by ',' to create a list
+raw_data_list = raw_data.split(',')
+
+# Calculate the number of columns. You said there are 19 columns
+num_columns = 19
+
+# Append None to the end of raw_data_list to make its length a multiple of num_columns
+raw_data_list.extend([None]*((num_columns - len(raw_data_list)) % num_columns))
+
+# Initialize a dictionary with empty lists for each column
+output = {
+    'sid': [],
+    'p2clientudf_memberassociation': [],
+    'p2clientudf_collectivesystem': [],
+    'p2clientudf_grspointofcontact': [],
+    'p2clinm': [],
+    'p2clinm_id': [],
+    'p2prjtype': [],
+    'p2prjtype_id': [],
+    'p2prjtype_sort': [],
+    'p2udf_subtype': [],
+    'invdt2': [],
+    'invdt2_id': [],
+    'invdt3': [],
+    'invdt3_id': [],
+    'invnbr': [],
+    'invnbr_id': [],
+    'invlineamt1': [],
+    'invlineamt1_id': [],
+    'invlineamt2': []
+}
+
+# Define a list with the keys of the output dictionary, ordered
+keys_order = [
+    'sid', 'p2clientudf_memberassociation', 'p2clientudf_collectivesystem', 
+    'p2clientudf_grspointofcontact', 'p2clinm', 'p2clinm_id', 'p2prjtype', 
+    'p2prjtype_id', 'p2prjtype_sort', 'p2udf_subtype', 'invdt2', 'invdt2_id', 
+    'invdt3', 'invdt3_id', 'invnbr', 'invnbr_id', 'invlineamt1', 'invlineamt1_id', 
+    'invlineamt2'
+]
+
+# Iterate through the list, picking 19 elements at a time and adding them to corresponding column
+for i in range(0, len(raw_data_list), num_columns):
+    for j in range(num_columns):
+        output[keys_order[j]].append(raw_data_list[i+j] if raw_data_list[i+j] != '' else None)
